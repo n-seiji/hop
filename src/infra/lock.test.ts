@@ -8,7 +8,7 @@ import { acquireRepoLock, withRepoLock } from "./lock.ts";
 let commonDir: string;
 
 beforeEach(async () => {
-  commonDir = await mkdtemp(join(tmpdir(), "nuthatch-lock-test-"));
+  commonDir = await mkdtemp(join(tmpdir(), "hop-lock-test-"));
 });
 
 afterEach(async () => {

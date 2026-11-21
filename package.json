@@ -1,15 +1,15 @@
 {
-  "name": "@n-seiji/nuthatch",
+  "name": "@n-seiji/hop",
   "version": "0.2.3",
   "description": "git worktree manager (hop)",
-  "homepage": "https://github.com/n-seiji/nuthatch#readme",
+  "homepage": "https://github.com/n-seiji/hop#readme",
   "bugs": {
-    "url": "https://github.com/n-seiji/nuthatch/issues"
+    "url": "https://github.com/n-seiji/hop/issues"
   },
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/n-seiji/nuthatch.git"
+    "url": "git+https://github.com/n-seiji/hop.git"
   },
   "bin": {
     "hop": "dist/cli.js"

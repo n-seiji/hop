@@ -237,7 +237,7 @@ jobs:
 
       - name: Publish to npm (Trusted Publishing, no token)
         env:
-          PACKAGE_NAME: "@n-seiji/nuthatch"
+          PACKAGE_NAME: "@n-seiji/hop"
           PACKAGE_VERSION: ${{ needs.prepare.outputs.version }}
         run: |
           set -euo pipefail

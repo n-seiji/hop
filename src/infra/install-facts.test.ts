@@ -7,7 +7,7 @@ import { type InstallFactsSource, readInstallFacts } from "./install-facts.ts";
 let sandbox: string;
 
 beforeEach(async () => {
-  const created = await mkdtemp(join(tmpdir(), "nuthatch-install-facts-"));
+  const created = await mkdtemp(join(tmpdir(), "hop-install-facts-"));
   sandbox = await realpath(created);
 });
 

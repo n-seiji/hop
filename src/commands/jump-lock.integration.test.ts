@@ -36,7 +36,7 @@ describe("jump --create — repository lock の競合 (integration)", () => {
 
       expect(result.ok).toBe(false);
       expect(result.exitCode).toBe(3);
-      expect(result.errorMessage).toContain("locked by another nuthatch process");
+      expect(result.errorMessage).toContain("locked by another hop process");
     } finally {
       await heldLock.release();
     }

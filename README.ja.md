@@ -1,13 +1,13 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-  <img src="docs/assets/logo-light.svg" alt="nuthatch" width="360">
+  <img src="docs/assets/logo-light.svg" alt="hop" width="210">
 </picture>
 
 [English](README.md) · **日本語**
 
 **git worktree を、作る・移る・消す。ぜんぶ `hop` ひとつで。**
 
-`nuthatch` は、人間と AI coding agent のための zero-setup な git worktree manager。コマンドは `hop` ひとつで、設定も状態ファイルもいらない。[Web サイト](https://www.sijis.me/projects/nuthatch)
+`hop` は、人間と AI coding agent のための zero-setup な git worktree manager。設定も状態ファイルもいらない。[Web サイト](https://www.sijis.me/work/hop)
 
 <table>
   <tr>
@@ -32,7 +32,7 @@
 ## Install
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/n-seiji/nuthatch/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/n-seiji/hop/main/install.sh | sh
 ```
 
 続けて `~/.zshrc` に次を足すと、`hop` が `cd` までしてくれる。
@@ -73,17 +73,17 @@ picker とそのキー、`hop root <branch>` などは [ガイド](docs/guide.ja
 
 ```sh
 # Claude Code
-/plugin marketplace add n-seiji/nuthatch
-/plugin install hop@nuthatch
+/plugin marketplace add n-seiji/hop
+/plugin install hop@hop
 
 # Codex
-codex plugin marketplace add n-seiji/nuthatch
+codex plugin marketplace add n-seiji/hop
 codex plugin install hop
 ```
 
 ## その他
 
-- [Web サイト](https://www.sijis.me/projects/nuthatch)
+- [Web サイト](https://www.sijis.me/work/hop)
 - [ガイド](docs/guide.ja.md): 使い方、picker、インストール、更新、トラブルシューティング
 - [docs/design.md](docs/design.md): 設計書
 - [AGENTS.md](AGENTS.md): このリポジトリで作業する coding agent 向けガイド

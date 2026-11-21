@@ -5,10 +5,10 @@
   "author": {
     "name": "n-seiji"
   },
-  "repository": "https://github.com/n-seiji/nuthatch",
+  "repository": "https://github.com/n-seiji/hop",
   "skills": "./skills/",
   "interface": {
-    "displayName": "hop (nuthatch)",
+    "displayName": "hop",
     "shortDescription": "Safe worktree operations with the hop CLI",
     "longDescription": "Teaches coding agents to create and select hop worktrees non-interactively, while loading destructive-operation guidance only when it is needed.",
     "developerName": "n-seiji",

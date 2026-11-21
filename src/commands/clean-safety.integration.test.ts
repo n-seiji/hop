@@ -111,7 +111,7 @@ afterEach(async () => {
 
 describe("clean safety (integration)", () => {
   it("clean でも未マージかつ upstream 生存の branch は候補にしない", async () => {
-    const originDir = await mkdtemp(`${tmpdir()}/nuthatch-origin-`);
+    const originDir = await mkdtemp(`${tmpdir()}/hop-origin-`);
     try {
       await createUnmergedTrackedWorktree("feat/unmerged-alive", originDir);
 

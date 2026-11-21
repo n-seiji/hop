@@ -53,16 +53,16 @@ describe("detectInstallMethod", () => {
   });
 
   it("mise の installs 配下の場合、バイナリでもスクリプトでも mise になる", () => {
-    const dir = "/home/u/.local/share/mise/installs/github-n-seiji-nuthatch/0.1.4";
+    const dir = "/home/u/.local/share/mise/installs/github-n-seiji-hop/0.1.4";
     expect(detectInstallMethod(compiledAt(`${dir}/hop`)).kind).toBe("mise");
     expect(detectInstallMethod(scriptAt(`${dir}/node_modules/x/dist/cli.js`)).kind).toBe("mise");
   });
 
   it("node_modules 配下のスクリプト (npm / bun のグローバル、npx) の場合、package-manager になる", () => {
     for (const path of [
-      "/usr/local/lib/node_modules/@n-seiji/nuthatch/dist/cli.js",
-      "/home/u/.bun/install/global/node_modules/@n-seiji/nuthatch/dist/cli.js",
-      "/home/u/.npm/_npx/ab/node_modules/@n-seiji/nuthatch/dist/cli.js",
+      "/usr/local/lib/node_modules/@n-seiji/hop/dist/cli.js",
+      "/home/u/.bun/install/global/node_modules/@n-seiji/hop/dist/cli.js",
+      "/home/u/.npm/_npx/ab/node_modules/@n-seiji/hop/dist/cli.js",
     ]) {
       expect(detectInstallMethod(scriptAt(path)).kind).toBe("package-manager");
     }
@@ -81,7 +81,7 @@ describe("detectInstallMethod", () => {
   });
 
   it("ソースチェックアウトや実行パスが分からない場合、other になる", () => {
-    expect(detectInstallMethod(scriptAt("/home/u/nuthatch/src/cli.ts"))).toEqual({
+    expect(detectInstallMethod(scriptAt("/home/u/hop/src/cli.ts"))).toEqual({
       kind: "other",
     });
     expect(detectInstallMethod(scriptAt(null))).toEqual({ kind: "other" });
@@ -93,14 +93,9 @@ describe("updateHint / suggestedCommand", () => {
     expect(updateHint("mise")).toBe("Update with mise: mise upgrade");
     expect(suggestedCommand("mise")).toEqual(["mise", "upgrade"]);
     expect(updateHint("package-manager")).toBe(
-      "Update with your package manager, e.g. npm i -g @n-seiji/nuthatch@latest",
+      "Update with your package manager, e.g. npm i -g @n-seiji/hop@latest",
     );
-    expect(suggestedCommand("package-manager")).toEqual([
-      "npm",
-      "i",
-      "-g",
-      "@n-seiji/nuthatch@latest",
-    ]);
+    expect(suggestedCommand("package-manager")).toEqual(["npm", "i", "-g", "@n-seiji/hop@latest"]);
     expect(updateHint("other")).toBe("Update hop with the tool you installed it with.");
     expect(suggestedCommand("other")).toBeNull();
   });

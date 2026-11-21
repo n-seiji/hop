@@ -137,7 +137,7 @@ describe("clean (integration)", () => {
   });
 
   it("upstream が gone で到達可能な commit がない worktree を gone として候補にする", async () => {
-    const originDir = await mkdtemp(join(tmpdir(), "nuthatch-origin-"));
+    const originDir = await mkdtemp(join(tmpdir(), "hop-origin-"));
     try {
       await repo.git(["init", "--bare", originDir]);
       await repo.git(["remote", "add", "origin", originDir]);

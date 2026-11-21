@@ -1,9 +1,9 @@
 #!/bin/sh
-# Installs the `hop` binary from nuthatch's GitHub Releases into
+# Installs the `hop` binary from hop's GitHub Releases into
 # ~/.local/bin. See docs/design.md and README.md for what hop does.
 set -eu
 
-REPO="n-seiji/nuthatch"
+REPO="n-seiji/hop"
 INSTALL_DIR="${HOP_INSTALL_DIR:-$HOME/.local/bin}"
 
 log() {
@@ -99,7 +99,7 @@ main() {
   target="${os}-${arch}"
 
   if [ "$target" = "linux-arm64" ]; then
-    fail "No prebuilt binary for linux-arm64 yet. Use 'npm i -g @n-seiji/nuthatch' instead."
+    fail "No prebuilt binary for linux-arm64 yet. Use 'npm i -g @n-seiji/hop' instead."
   fi
 
   asset="hop-${target}"

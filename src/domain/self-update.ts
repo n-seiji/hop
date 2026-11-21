@@ -5,7 +5,7 @@
  * install-method.ts.
  */
 
-const GITHUB_REPO = "n-seiji/nuthatch";
+const GITHUB_REPO = "n-seiji/hop";
 
 export const GITHUB_LATEST_RELEASE_URL = `https://api.github.com/repos/${GITHUB_REPO}/releases/latest`;
 

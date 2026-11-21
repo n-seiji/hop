@@ -1,8 +1,7 @@
-# nuthatch design document
+# hop design document
 
-A git worktree manager. The command name is `hop` (the package name is
-nuthatch). It replaces the old bash `wt` with its fixed slot system, rebuilt
-as a stateless create-or-jump tool.
+A git worktree manager, run as the `hop` command. It replaces the old bash `wt`
+with its fixed slot system, rebuilt as a stateless create-or-jump tool.
 
 ## Design principles
 
@@ -126,7 +125,7 @@ a handful of path checks, first match wins:
 | # | Path of the running hop | `method` | `--update` does | `--update` hint (stderr, exit 1) |
 |---|---|---|---|---|
 | 1 | contains `/mise/installs/` (a binary or an npm package) | `mise` | refuses | `Update with mise: mise upgrade` |
-| 2 | a script (not compiled) whose path contains `/node_modules/`: npm / bun / pnpm / yarn global, npx, a project dependency | `package-manager` | refuses | `Update with your package manager, e.g. npm i -g @n-seiji/nuthatch@latest` |
+| 2 | a script (not compiled) whose path contains `/node_modules/`: npm / bun / pnpm / yarn global, npx, a project dependency | `package-manager` | refuses | `Update with your package manager, e.g. npm i -g @n-seiji/hop@latest` |
 | 3 | a script anywhere else (`bun run src/cli.ts`, a source checkout) | `other` | refuses | `Update hop with the tool you installed it with.` |
 | 4 | a compiled binary inside another tool's tree: `/Cellar/` or `/Caskroom/` (Homebrew), `/nix/store/`, `/aquaproj-aqua/`, `/aqua/pkgs/`, `/.proto/`, or any `/installs/` (asdf-style) | `other` | refuses | `Update hop with the tool you installed it with.` |
 | 5 | a compiled binary on a platform with no prebuilt asset (anything but darwin-arm64 / darwin-x64 / linux-x64) | `other` | refuses | `Update hop with the tool you installed it with.` |
@@ -145,7 +144,7 @@ path, so it errs on the side of refusing, and a binary from `install.sh` or one
 copied to `~/.local/bin` is unaffected.
 
 **Latest version.** Always GitHub: `GET
-https://api.github.com/repos/n-seiji/nuthatch/releases/latest`, field
+https://api.github.com/repos/n-seiji/hop/releases/latest`, field
 `tag_name`. Versions are plain `x.y.z`, compared numerically; anything else is
 an error rather than a guess. An installed version that is the same as or
 newer than the latest is never "updated": no downgrade. For `--check`, the
@@ -200,7 +199,7 @@ With `--json` it is the envelope, on one line, with that same object as `data`
 what hop itself did: `none` (already up to date, or `--check`) or `replaced`
 (the standalone binary was swapped). `command` is the argv a user would run to
 update a `mise` (`["mise","upgrade"]`) or `package-manager`
-(`["npm","i","-g","@n-seiji/nuthatch@latest"]`) install, reported by `--check`
+(`["npm","i","-g","@n-seiji/hop@latest"]`) install, reported by `--check`
 when an update is available; hop never runs it. Otherwise `null`, always for
 `standalone` and `other`. Progress (`Checking...`, `Downloading...`) and the
 hint go to stderr. A refusal or any other failure leaves `data` out of the
@@ -212,11 +211,11 @@ envelope and puts the message on stderr. The zsh wrapper needs no change:
 | Category | Definition | Allowed operations |
 |---|---|---|
 | root | The main clone | `cd` / temporary switching via `hop root <branch>` only. Never used for editing |
-| managed | Under `_worktree/<repo>/` (created by nuthatch) | `cd` / `rm` / `clean`, all allowed |
+| managed | Under `_worktree/<repo>/` (created by hop) | `cd` / `rm` / `clean`, all allowed |
 | external | Everything else (created by Claude Code's EnterWorktree, Codex, etc.) | `cd` / listing / jump / `rm` allowed. Not included in `clean`'s automatic candidates (can be included explicitly with `--ext`) |
 
 **Safety rule (most important):** "visible and reachable" is kept separate
-from "nuthatch may change it." Jumping to an external worktree is always
+from "hop may change it." Jumping to an external worktree is always
 allowed. `hop` can now `rm` an external worktree with the same procedure as
 a managed one (dirty check → overridable with `--force`), but deleting from
 the picker always requires a y/N confirmation for an external worktree (to
@@ -483,8 +482,8 @@ tampered Release. Each binary therefore also gets a build-provenance
 attestation (releases after v0.2.0). It is created at build time, so it can
 exist for a binary whose run later fails before publish; it proves only that
 this workflow built the binary, not that it was released. It can be verified
-manually with `gh attestation verify <file> --repo n-seiji/nuthatch
---signer-workflow github.com/n-seiji/nuthatch/.github/workflows/release.yml`.
+manually with `gh attestation verify <file> --repo n-seiji/hop
+--signer-workflow github.com/n-seiji/hop/.github/workflows/release.yml`.
 `install.sh` runs that check (with the explicit `github.com/` host, so a
 `GH_HOST` pointing at GHE does not break it) after the SHA-256 check and
 before placing the binary. No `gh` on PATH, or `gh` exiting 4 (not
@@ -496,9 +495,9 @@ authenticated), prints a warning and continues. Any other failure aborts,
 ## Install (post-release)
 
 ```sh
-npm i -g @n-seiji/nuthatch          # npm / bun
-mise use -g npm:@n-seiji/nuthatch   # mise
-curl -fsSL https://raw.githubusercontent.com/n-seiji/nuthatch/main/install.sh | sh  # binary
+npm i -g @n-seiji/hop          # npm / bun
+mise use -g npm:@n-seiji/hop   # mise
+curl -fsSL https://raw.githubusercontent.com/n-seiji/hop/main/install.sh | sh  # binary
 ```
 
 `hop --update` replaces only the install.sh binary in place; other installs

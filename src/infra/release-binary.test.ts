@@ -28,7 +28,7 @@ const permissionsOf = async (path: string): Promise<number> => {
 let sandbox: string;
 
 beforeEach(async () => {
-  sandbox = await mkdtemp(join(tmpdir(), "nuthatch-release-binary-"));
+  sandbox = await mkdtemp(join(tmpdir(), "hop-release-binary-"));
 });
 
 afterEach(async () => {

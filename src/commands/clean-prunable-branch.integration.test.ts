@@ -54,7 +54,7 @@ afterEach(async () => {
 
 describe("clean --with-branch on prunable worktrees (integration)", () => {
   it("prunable かつ未マージの branch は --with-branch でも残し、理由を返す", async () => {
-    const originDir = await mkdtemp(`${tmpdir()}/nuthatch-origin-`);
+    const originDir = await mkdtemp(`${tmpdir()}/hop-origin-`);
     try {
       const worktreePath = await createUnmergedTrackedWorktree("feat/prunable-unmerged", originDir);
       await rm(worktreePath, { recursive: true, force: true });
@@ -82,7 +82,7 @@ describe("clean --with-branch on prunable worktrees (integration)", () => {
   });
 
   it("prunable かつ default branch に merge 済みの branch は --with-branch で削除する", async () => {
-    const originDir = await mkdtemp(`${tmpdir()}/nuthatch-origin-`);
+    const originDir = await mkdtemp(`${tmpdir()}/hop-origin-`);
     try {
       const worktreePath = await createUnmergedTrackedWorktree("feat/prunable-merged", originDir);
       await repo.git(["merge", "feat/prunable-merged"]);
@@ -110,7 +110,7 @@ describe("clean --with-branch on prunable worktrees (integration)", () => {
   });
 
   it("prunable で upstream が gone かつ squash merge 済みの branch は --with-branch で削除する", async () => {
-    const originDir = await mkdtemp(`${tmpdir()}/nuthatch-origin-`);
+    const originDir = await mkdtemp(`${tmpdir()}/hop-origin-`);
     try {
       await repo.git(["init", "--bare", originDir]);
       await repo.git(["remote", "add", "origin", originDir]);
@@ -163,7 +163,7 @@ describe("clean --with-branch on prunable worktrees (integration)", () => {
   });
 
   it("prunable で upstream が gone でも default branch に未反映の branch は --with-branch でも残し、理由を返す", async () => {
-    const originDir = await mkdtemp(`${tmpdir()}/nuthatch-origin-`);
+    const originDir = await mkdtemp(`${tmpdir()}/hop-origin-`);
     try {
       await repo.git(["init", "--bare", originDir]);
       await repo.git(["remote", "add", "origin", originDir]);
