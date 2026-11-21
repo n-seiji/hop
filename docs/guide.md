@@ -169,6 +169,21 @@ anyway. v0.2.0 and earlier have no attestation, so `HOP_VERSION=v0.2.0` needs
 `HOP_SKIP_ATTESTATION=1`. If the check fails with an expired token, run
 `gh auth status`.
 
+### Coming from nuthatch
+
+hop was published as `nuthatch` up to v0.2.3. The command and its behavior are
+unchanged; only the names moved.
+
+```sh
+npm rm -g @n-seiji/nuthatch && npm i -g @n-seiji/hop   # npm: remove first, both packages install a `hop` bin
+mise use github:n-seiji/hop                            # mise: then drop the old github:n-seiji/nuthatch entry
+```
+
+In Claude Code, the plugin is now `hop@hop`: run `/plugin marketplace add
+n-seiji/hop`, `/plugin install hop@hop`, then remove the old `nuthatch`
+marketplace. A binary installed with `install.sh` keeps updating through
+`hop --update`.
+
 ### Updating
 
 ```sh

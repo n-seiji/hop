@@ -162,6 +162,20 @@ gh attestation verify ./hop-darwin-arm64 --repo n-seiji/hop \
 `HOP_VERSION=v0.2.0` では `HOP_SKIP_ATTESTATION=1` が必要。トークン期限切れで
 失敗した場合は `gh auth status` を確認する。
 
+### nuthatch からの移行
+
+hop は v0.2.3 まで `nuthatch` という名前で公開していた。コマンドと挙動は同じで、
+変わったのは名前だけ。
+
+```sh
+npm rm -g @n-seiji/nuthatch && npm i -g @n-seiji/hop   # npm: 先に消す。どちらも `hop` という bin を入れる
+mise use github:n-seiji/hop                            # mise: 古い github:n-seiji/nuthatch の行は消す
+```
+
+Claude Code の plugin は `hop@hop` になった。`/plugin marketplace add n-seiji/hop` と
+`/plugin install hop@hop` を実行し、古い `nuthatch` marketplace を消す。`install.sh` で
+入れたバイナリは `hop --update` でそのまま更新できる。
+
 ### 更新
 
 ```sh
