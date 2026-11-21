@@ -31,7 +31,7 @@ describe("colorEnabled", () => {
 });
 
 describe("createTermPort().confirm", () => {
-  const TERM_MODULE = new URL("./term.ts", import.meta.url).pathname;
+  const TERM_MODULE = new URL("term.ts", import.meta.url).pathname;
   const SCRIPT = `import { createTermPort } from ${JSON.stringify(TERM_MODULE)};
 process.stdout.write(String(await createTermPort().confirm("Remove?")));`;
 
