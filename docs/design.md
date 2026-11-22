@@ -259,6 +259,16 @@ A worktree is never a candidate if removing it would lose anything.
   removed. Every skip is a warning on stderr naming the path and, for a git
   refusal, git's own message — `removed` is never silently shorter than what
   was confirmed. Exit stays 0.
+- Progress: removal is the slow part, so each candidate gets one line on
+  stderr just before its removal starts, `[i/N] removing <branch>` (the path
+  when the worktree has no branch). `N` is the number of candidates that
+  survived the lock-protected re-validation, so it can be smaller than the
+  list the user confirmed. It is emitted after `--yes` and after a confirmed
+  y/N prompt alike, with or without `--json`, TTY or not. It is not emitted
+  for `--dry-run`, a declined prompt, or a run with nothing to remove. A
+  candidate that is then skipped has already had its line; the skip is still
+  the end-of-run warning above. stdout (the data / JSON) and exit codes are
+  unchanged.
 - `--with-branch` also deletes the branch itself (only when merged/gone has
   been confirmed). Since a prunable worktree has already disappeared, if the
   branch's merged/gone status can't be separately confirmed, only the
