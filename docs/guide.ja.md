@@ -129,17 +129,17 @@ eval "$(hop init zsh)"
 ## Install
 
 推奨: GitHub Release のバイナリ (bun 製、mise なら
-`mise use github:n-seiji/nuthatch`)。npm 版は Node で動くため git 呼び出しが遅い
+`mise use github:n-seiji/hop`)。npm 版は Node で動くため git 呼び出しが遅い
 (hop ls ~400ms vs ~60ms) — CI や頻繁な呼び出しにはバイナリを使う。
 
 ```sh
 # ビルド済みバイナリ (macOS arm64/x64, Linux x64) — Node.js 不要、最速:
-curl -fsSL https://raw.githubusercontent.com/n-seiji/nuthatch/main/install.sh | sh
-mise use github:n-seiji/nuthatch # mise、GitHub Release のバイナリ経由
+curl -fsSL https://raw.githubusercontent.com/n-seiji/hop/main/install.sh | sh
+mise use github:n-seiji/hop # mise、GitHub Release のバイナリ経由
 
 # npm (低速: Node 経由で git を呼ぶ — バイナリの hop ls ~60ms に対し ~400ms)
-npm i -g @n-seiji/nuthatch        # または: bunx @n-seiji/nuthatch
-mise use -g npm:@n-seiji/nuthatch # mise、npm 経由
+npm i -g @n-seiji/hop        # または: bunx @n-seiji/hop
+mise use -g npm:@n-seiji/hop # mise、npm 経由
 ```
 
 install script は `hop` を `~/.local/bin` に置き (`HOP_INSTALL_DIR` で
@@ -151,8 +151,8 @@ v0.2.0 より後のリリースのバイナリにはビルド来歴 (build prove
 が付く。ダウンロードしたバイナリを手動で検証するには:
 
 ```sh
-gh attestation verify ./hop-darwin-arm64 --repo n-seiji/nuthatch \
-  --signer-workflow github.com/n-seiji/nuthatch/.github/workflows/release.yml
+gh attestation verify ./hop-darwin-arm64 --repo n-seiji/hop \
+  --signer-workflow github.com/n-seiji/hop/.github/workflows/release.yml
 ```
 
 `gh` が入っていてログイン済みなら、`install.sh` は SHA-256 の確認の後にこの
@@ -161,6 +161,20 @@ gh attestation verify ./hop-darwin-arm64 --repo n-seiji/nuthatch \
 トールする。v0.2.0 以前のリリースには attestation がないため、
 `HOP_VERSION=v0.2.0` では `HOP_SKIP_ATTESTATION=1` が必要。トークン期限切れで
 失敗した場合は `gh auth status` を確認する。
+
+### nuthatch からの移行
+
+hop は v0.2.3 まで `nuthatch` という名前で公開していた。コマンドと挙動は同じで、
+変わったのは名前だけ。
+
+```sh
+npm rm -g @n-seiji/nuthatch && npm i -g @n-seiji/hop   # npm: 先に消す。どちらも `hop` という bin を入れる
+mise use github:n-seiji/hop                            # mise: 古い github:n-seiji/nuthatch の行は消す
+```
+
+Claude Code の plugin は `hop@hop` になった。`/plugin marketplace add n-seiji/hop` と
+`/plugin install hop@hop` を実行し、古い `nuthatch` marketplace を消す。`install.sh` で
+入れたバイナリは `hop --update` でそのまま更新できる。
 
 ### 更新
 
@@ -180,7 +194,7 @@ hop --version         # 今どの version か
 |---|---|
 | `install.sh` (`~/.local/bin` のバイナリ) | `hop --update`、または `install.sh` を再実行 |
 | mise | `mise upgrade` |
-| npm / bun / pnpm / yarn の global | `npm i -g @n-seiji/nuthatch@latest` (または使っているパッケージマネージャの同等コマンド) |
+| npm / bun / pnpm / yarn の global | `npm i -g @n-seiji/hop@latest` (または使っているパッケージマネージャの同等コマンド) |
 | Homebrew・Nix・aqua・proto・ソースチェックアウト・その他のツール | そのツール自身の upgrade コマンド |
 
 `hop --update --check` はどのインストール方法でも使え、同じ案内を報告する。

@@ -14,7 +14,7 @@ import {
 } from "valibot";
 
 /**
- * Single source of truth for nuthatch's `--json` output contract
+ * Single source of truth for hop's `--json` output contract
  * (docs/design.md: `{schemaVersion, command, data, warnings}`).
  * Types are inferred from these schemas (`InferOutput`) rather than
  * hand-declared, so the runtime contract and the compile-time type can
@@ -25,7 +25,7 @@ import {
 export const WorktreeKindSchema = picklist(["root", "managed", "external"]);
 export type WorktreeKind = InferOutput<typeof WorktreeKindSchema>;
 
-/** A single worktree as reported by `git worktree list`, plus nuthatch's classification. */
+/** A single worktree as reported by `git worktree list`, plus hop's classification. */
 export const WorktreeSchema = object({
   path: string(),
   head: nullable(string()),

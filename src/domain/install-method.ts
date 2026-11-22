@@ -95,7 +95,7 @@ export const suggestedCommand = (kind: ForeignKind): readonly string[] | null =>
   if (kind === "mise") {
     return ["mise", "upgrade"];
   }
-  return kind === "package-manager" ? ["npm", "i", "-g", "@n-seiji/nuthatch@latest"] : null;
+  return kind === "package-manager" ? ["npm", "i", "-g", "@n-seiji/hop@latest"] : null;
 };
 
 /** The one line telling the user how to update an install hop does not replace. */

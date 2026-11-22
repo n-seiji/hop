@@ -31,7 +31,7 @@ let binaryPath: string;
 let repo: TestRepo;
 
 beforeAll(async () => {
-  binaryDir = await mkdtemp(join(tmpdir(), "nuthatch-compiled-"));
+  binaryDir = await mkdtemp(join(tmpdir(), "hop-compiled-"));
   binaryPath = join(binaryDir, "hop");
   // Same flags as .github/workflows/release.yml, so this tests what ships.
   await execFile("bun", [
@@ -130,7 +130,7 @@ describe("コンパイル済みバイナリでの `hop --update` (実際の proc
     });
 
   it("mise の installs 配下に置かれている場合、ネットワークに出る前に mise upgrade を案内して拒否する", async () => {
-    const installed = await installBinaryAt("mise/installs/github-n-seiji-nuthatch/0.1.4/hop");
+    const installed = await installBinaryAt("mise/installs/github-n-seiji-hop/0.1.4/hop");
 
     const result = await update(installed);
 

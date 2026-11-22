@@ -36,7 +36,7 @@ describe("ls (integration)", () => {
   });
 
   it("upstream に対する ahead / behind を branch ごとに返し、gone と upstream 無しは null にする", async () => {
-    const originDir = await mkdtemp(join(tmpdir(), "nuthatch-origin-"));
+    const originDir = await mkdtemp(join(tmpdir(), "hop-origin-"));
     try {
       await repo.git(["init", "--bare", originDir]);
       await repo.git(["remote", "add", "origin", originDir]);

@@ -1,4 +1,4 @@
-# nuthatch development rules (development-only, not distributed)
+# hop development rules (development-only, not distributed)
 
 - The source of truth for design is docs/design.md. Any change to the CLI
   contract (stdout / JSON schema / exit codes) must come with a matching

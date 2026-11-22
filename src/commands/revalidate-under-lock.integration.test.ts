@@ -38,7 +38,7 @@ const isRepoLockHeld = async (): Promise<boolean> => {
     await lock.release();
     return false;
   } catch (error) {
-    return error instanceof Error && error.message.includes("locked by another nuthatch process");
+    return error instanceof Error && error.message.includes("locked by another hop process");
   }
 };
 

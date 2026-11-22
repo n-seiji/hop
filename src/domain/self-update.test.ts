@@ -124,16 +124,16 @@ describe("isWriteDenied", () => {
 describe("release URLs", () => {
   it("最新版の取得元は固定の HTTPS URL である", () => {
     expect(GITHUB_LATEST_RELEASE_URL).toBe(
-      "https://api.github.com/repos/n-seiji/nuthatch/releases/latest",
+      "https://api.github.com/repos/n-seiji/hop/releases/latest",
     );
   });
 
   it("asset は latest/download ではなく、解決済みのタグ (v<version>) から取得する", () => {
     expect(releaseAssetUrl("0.1.5", "hop-linux-x64")).toBe(
-      "https://github.com/n-seiji/nuthatch/releases/download/v0.1.5/hop-linux-x64",
+      "https://github.com/n-seiji/hop/releases/download/v0.1.5/hop-linux-x64",
     );
     expect(releaseAssetUrl("0.1.5", "hop-linux-x64.sha256")).toBe(
-      "https://github.com/n-seiji/nuthatch/releases/download/v0.1.5/hop-linux-x64.sha256",
+      "https://github.com/n-seiji/hop/releases/download/v0.1.5/hop-linux-x64.sha256",
     );
   });
 });

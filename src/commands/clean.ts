@@ -13,7 +13,7 @@ import {
 
 export interface CleanOptions {
   readonly cwd: string;
-  /** Also consider external (non-nuthatch-managed) worktrees. */
+  /** Also consider external (non-hop-managed) worktrees. */
   readonly ext: boolean;
   /** Delete the branch too, in addition to the worktree. */
   readonly withBranch: boolean;

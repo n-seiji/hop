@@ -43,7 +43,7 @@ describeIfZsh("hop init zsh (real zsh)", () => {
   let targetDir: string;
 
   beforeEach(async () => {
-    workDir = await mkdtemp(join(tmpdir(), "nuthatch-zsh-"));
+    workDir = await mkdtemp(join(tmpdir(), "hop-zsh-"));
     fakeBinDir = join(workDir, "bin");
     targetDir = join(workDir, "target-worktree");
     await mkdir(fakeBinDir, { recursive: true });

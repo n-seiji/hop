@@ -20,7 +20,7 @@ const makeBin = async (dir: string, mode: number): Promise<string> => {
 };
 
 beforeEach(async () => {
-  sandbox = await mkdtemp(join(tmpdir(), "nuthatch-git-exe-"));
+  sandbox = await mkdtemp(join(tmpdir(), "hop-git-exe-"));
 });
 
 afterEach(async () => {

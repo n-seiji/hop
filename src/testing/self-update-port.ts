@@ -71,16 +71,16 @@ export const standaloneFacts = (binaryPath = "/home/u/.local/bin/hop"): InstallF
 export const miseFacts = (): InstallFacts =>
   installFactsOf({
     compiled: true,
-    executablePath: "/home/u/.local/share/mise/installs/github-n-seiji-nuthatch/0.1.4/hop",
+    executablePath: "/home/u/.local/share/mise/installs/github-n-seiji-hop/0.1.4/hop",
   });
 
 export const npmFacts = (): InstallFacts =>
   installFactsOf({
-    scriptPath: "/usr/local/lib/node_modules/@n-seiji/nuthatch/dist/cli.js",
+    scriptPath: "/usr/local/lib/node_modules/@n-seiji/hop/dist/cli.js",
   });
 
 export const sourceCheckoutFacts = (): InstallFacts =>
-  installFactsOf({ scriptPath: "/home/u/ghq/github.com/n-seiji/nuthatch/src/cli.ts" });
+  installFactsOf({ scriptPath: "/home/u/ghq/github.com/n-seiji/hop/src/cli.ts" });
 
 /** The data an update that is about to be applied starts from (before `action` / `command` change). */
 export const updateDataOf = (overrides: Partial<UpdateData> = {}): UpdateData => ({

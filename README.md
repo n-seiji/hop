@@ -1,13 +1,13 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-  <img src="docs/assets/logo-light.svg" alt="nuthatch" width="360">
+  <img src="docs/assets/logo-light.svg" alt="hop" width="210">
 </picture>
 
 **English** · [日本語](README.ja.md)
 
 **Create, jump between, and remove git worktrees. All with `hop`.**
 
-`nuthatch` is a zero-setup git worktree manager for humans and AI coding agents. Its one command, `hop`, needs no config and no state files. [Website](https://www.sijis.me/en/projects/nuthatch)
+`hop` is a zero-setup git worktree manager for humans and AI coding agents. It needs no config and no state files. [Website](https://www.sijis.me/en/work/hop)
 
 <table>
   <tr>
@@ -32,7 +32,7 @@
 ## Install
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/n-seiji/nuthatch/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/n-seiji/hop/main/install.sh | sh
 ```
 
 Then add this to `~/.zshrc` so `hop` can `cd` for you:
@@ -73,17 +73,17 @@ Every command can complete non-interactively. `--json` works everywhere, paths g
 
 ```sh
 # Claude Code
-/plugin marketplace add n-seiji/nuthatch
-/plugin install hop@nuthatch
+/plugin marketplace add n-seiji/hop
+/plugin install hop@hop
 
 # Codex
-codex plugin marketplace add n-seiji/nuthatch
+codex plugin marketplace add n-seiji/hop
 codex plugin install hop
 ```
 
 ## More
 
-- [Website](https://www.sijis.me/en/projects/nuthatch)
+- [Website](https://www.sijis.me/en/work/hop)
 - [Guide](docs/guide.md): usage, picker, install, updating, troubleshooting
 - [docs/design.md](docs/design.md): the design document
 - [AGENTS.md](AGENTS.md): guide for coding agents working on this repo

@@ -1,4 +1,4 @@
-const ZSH_TEMPLATE = `# nuthatch shell integration for zsh.
+const ZSH_TEMPLATE = `# hop shell integration for zsh.
 # Usage: eval "$(hop init zsh)"
 hop() {
   # stdout is not a terminal (e.g. inside p=$(hop ...)): a cd here would only

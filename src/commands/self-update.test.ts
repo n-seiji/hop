@@ -129,7 +129,7 @@ describe("selfUpdate --check", () => {
     expect(result.data).toMatchObject({
       method: "package-manager",
       action: "none",
-      command: ["npm", "i", "-g", "@n-seiji/nuthatch@latest"],
+      command: ["npm", "i", "-g", "@n-seiji/hop@latest"],
     });
     expect(fake.calls).toEqual(["installFacts", "latestGithubVersion"]);
     expect(fake.logs.join("\n")).toContain("Update with your package manager");
@@ -204,7 +204,7 @@ describe("selfUpdate: hop が置き換えない install の場合", () => {
   it("method ごとの案内を 1 行だけメッセージにして exit 1 で拒否し、ネットワークに出ない", async () => {
     for (const [value, hint] of [
       [miseFacts(), "Update with mise: mise upgrade"],
-      [npmFacts(), "Update with your package manager, e.g. npm i -g @n-seiji/nuthatch@latest"],
+      [npmFacts(), "Update with your package manager, e.g. npm i -g @n-seiji/hop@latest"],
       [sourceCheckoutFacts(), "Update hop with the tool you installed it with."],
       [
         { ...standaloneFacts("/opt/homebrew/Cellar/hop/0.1.4/bin/hop") },

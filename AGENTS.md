@@ -4,7 +4,7 @@ Guide for coding agents (Claude Code / Codex, etc.) working in this repo.
 
 ## Repository Overview
 
-`nuthatch` — a git worktree manager. The command users run is `hop`.
+`hop` — a git worktree manager.
 The source of truth for design is [docs/design.md](docs/design.md). Read it
 before implementing anything.
 

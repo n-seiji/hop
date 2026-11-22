@@ -135,18 +135,18 @@ eval "$(hop init zsh)"
 ## Install
 
 Recommended: the GitHub Release binary (built with bun; via mise,
-`mise use github:n-seiji/nuthatch`). The npm version runs on Node, so its git
+`mise use github:n-seiji/hop`). The npm version runs on Node, so its git
 calls are slower (hop ls ~400ms vs ~60ms) — prefer the binary for CI or
 frequent invocations.
 
 ```sh
 # Prebuilt binary (macOS arm64/x64, Linux x64) — no Node.js required, fastest:
-curl -fsSL https://raw.githubusercontent.com/n-seiji/nuthatch/main/install.sh | sh
-mise use github:n-seiji/nuthatch # mise, via the GitHub Release binary
+curl -fsSL https://raw.githubusercontent.com/n-seiji/hop/main/install.sh | sh
+mise use github:n-seiji/hop # mise, via the GitHub Release binary
 
 # npm (slower: shells out to git via Node — hop ls ~400ms vs ~60ms for the binary)
-npm i -g @n-seiji/nuthatch        # or: bunx @n-seiji/nuthatch
-mise use -g npm:@n-seiji/nuthatch # mise, via npm
+npm i -g @n-seiji/hop        # or: bunx @n-seiji/hop
+mise use -g npm:@n-seiji/hop # mise, via npm
 ```
 
 The install script places `hop` in `~/.local/bin` (override with
@@ -158,8 +158,8 @@ Release binaries from releases after v0.2.0 carry a build-provenance
 attestation. To verify a downloaded binary by hand:
 
 ```sh
-gh attestation verify ./hop-darwin-arm64 --repo n-seiji/nuthatch \
-  --signer-workflow github.com/n-seiji/nuthatch/.github/workflows/release.yml
+gh attestation verify ./hop-darwin-arm64 --repo n-seiji/hop \
+  --signer-workflow github.com/n-seiji/hop/.github/workflows/release.yml
 ```
 
 When `gh` is installed and logged in, `install.sh` runs this check (pinned to
@@ -168,6 +168,21 @@ Without `gh`, or without `gh auth login`, it prints a warning and installs
 anyway. v0.2.0 and earlier have no attestation, so `HOP_VERSION=v0.2.0` needs
 `HOP_SKIP_ATTESTATION=1`. If the check fails with an expired token, run
 `gh auth status`.
+
+### Coming from nuthatch
+
+hop was published as `nuthatch` up to v0.2.3. The command and its behavior are
+unchanged; only the names moved.
+
+```sh
+npm rm -g @n-seiji/nuthatch && npm i -g @n-seiji/hop   # npm: remove first, both packages install a `hop` bin
+mise use github:n-seiji/hop                            # mise: then drop the old github:n-seiji/nuthatch entry
+```
+
+In Claude Code, the plugin is now `hop@hop`: run `/plugin marketplace add
+n-seiji/hop`, `/plugin install hop@hop`, then remove the old `nuthatch`
+marketplace. A binary installed with `install.sh` keeps updating through
+`hop --update`.
 
 ### Updating
 
@@ -187,7 +202,7 @@ request, and prints one line saying how to update it (exit 1):
 |---|---|
 | `install.sh` (binary in `~/.local/bin`) | `hop --update`, or re-run `install.sh` |
 | mise | `mise upgrade` |
-| npm / bun / pnpm / yarn global | `npm i -g @n-seiji/nuthatch@latest` (or your package manager's equivalent) |
+| npm / bun / pnpm / yarn global | `npm i -g @n-seiji/hop@latest` (or your package manager's equivalent) |
 | Homebrew, Nix, aqua, proto, a source checkout, any other tool | that tool's own upgrade command |
 
 `hop --update --check` works for every install and reports the same hint. The

@@ -78,7 +78,7 @@ const runInstaller = async (options: {
 };
 
 beforeEach(async () => {
-  tempDir = await mkdtemp(join(tmpdir(), "nuthatch-install-test-"));
+  tempDir = await mkdtemp(join(tmpdir(), "hop-install-test-"));
 });
 
 afterEach(async () => {
@@ -103,9 +103,9 @@ describe("install.sh", () => {
     expect(await readdir(installDir)).toEqual(["hop"]);
     const ghLog = await readFile(join(binDir, "gh.log"), "utf8");
     expect(ghLog).toContain("attestation verify");
-    expect(ghLog).toContain("--repo n-seiji/nuthatch");
+    expect(ghLog).toContain("--repo n-seiji/hop");
     expect(ghLog).toContain(
-      "--signer-workflow github.com/n-seiji/nuthatch/.github/workflows/release.yml",
+      "--signer-workflow github.com/n-seiji/hop/.github/workflows/release.yml",
     );
     const curlLog = await readFile(logPath, "utf8");
     const urls = curlLog.trim().split("\n");

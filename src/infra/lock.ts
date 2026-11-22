@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { canReclaimLock } from "../domain/lock-policy.ts";
 import { type CommandResult, EXIT_SAFE_REJECTION, fail } from "../domain/result.ts";
 
+// Kept across the rename: an older hop running at the same time must still be excluded here.
 const LOCK_DIR_NAME = "nuthatch-lock";
 const LOCK_INFO_FILE = "info.json";
 const DEFAULT_TTL_MS = 30_000;
@@ -19,7 +20,7 @@ class LockHeldError extends Error {
   readonly info: LockInfo;
 
   constructor(info: LockInfo) {
-    super(`Repository is locked by another nuthatch process (pid ${info.pid})`);
+    super(`Repository is locked by another hop process (pid ${info.pid})`);
     this.name = "LockHeldError";
     this.info = info;
   }

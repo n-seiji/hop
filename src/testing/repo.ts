@@ -31,7 +31,7 @@ export interface TestRepo {
 
 /** Creates a real git repo (default branch `main`, one initial commit) in a tmpdir. */
 export const createTestRepo = async (): Promise<TestRepo> => {
-  const rootDir = await mkdtemp(join(tmpdir(), "nuthatch-test-"));
+  const rootDir = await mkdtemp(join(tmpdir(), "hop-test-"));
   const homeDir = join(rootDir, "home");
   const repoPath = join(rootDir, "repo");
   const env = isolatedEnv(homeDir);
