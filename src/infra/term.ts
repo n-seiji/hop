@@ -29,8 +29,10 @@ export const createTermPort = (): TermPort => ({
         terminal: false,
       });
       rl.question(`${message} [y/N] `, (answer) => {
-        rl.close();
+        // Resolve before closing: close() emits "close" synchronously, and
+        // The handler below would settle the promise as a refusal first.
         resolve(answer.trim().toLowerCase() === "y");
+        rl.close();
       });
       rl.once("close", () => {
         resolve(false);

@@ -30,7 +30,9 @@ export interface CleanOptions {
  * only proceeds once removal is confirmed — by `--yes`, or by the user at the
  * y/N prompt (`term.confirm`) when running on a TTY. Without `--yes` and
  * without a TTY it refuses with a usage error; a declined prompt removes
- * nothing and still succeeds (exit 0).
+ * nothing and still succeeds (exit 0). While removing, one `[i/N] removing
+ * <branch|path>` line per candidate goes to stderr just before its removal
+ * (N counts only candidates that survived re-validation); stdout stays data.
  */
 export const clean = async (
   git: GitPort,
@@ -72,6 +74,7 @@ export const clean = async (
   return executeClean({
     git,
     fs,
+    term,
     context,
     candidates,
     cleanOptions: options,
@@ -108,6 +111,7 @@ const withoutLocked = (
 interface ExecuteCleanOptions {
   readonly git: GitPort;
   readonly fs: FsPort;
+  readonly term: TermPort;
   readonly context: RepoContext;
   readonly candidates: readonly CleanCandidate[];
   readonly cleanOptions: CleanOptions;
@@ -203,6 +207,7 @@ const canDeletePrunableBranch = async (
 const executeClean = ({
   git,
   fs,
+  term,
   context,
   candidates,
   cleanOptions,
@@ -230,7 +235,7 @@ const executeClean = ({
       ]);
 
       const removed: string[] = [];
-      for (const candidate of stillValid) {
+      for (const [index, candidate] of stillValid.entries()) {
         // A prunable worktree has no directory to inspect, so prunable alone
         // Does not establish that its branch is safe to delete.
         // oxlint-disable-next-line no-await-in-loop
@@ -249,6 +254,10 @@ const executeClean = ({
             `Keeping branch "${candidate.branch}": prunable worktree is not confirmed merged or gone.`,
           );
         }
+        // Removal is the slow part and stdout stays data-only, so progress goes
+        // To stderr just before each one starts.
+        const label = candidate.branch.length > 0 ? candidate.branch : candidate.path;
+        term.logStderr(`[${index + 1}/${stillValid.length}] removing ${label}`);
         // oxlint-disable-next-line no-await-in-loop
         const outcome = await removeCandidate({
           git,
